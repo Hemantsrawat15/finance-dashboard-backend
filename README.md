@@ -14,7 +14,7 @@ JWT authentication, financial record management, and dashboard analytics.
 |----------|-----|
 | Base URL | `https://finance-dashboard-backend-production-d325.up.railway.app/` |
 | Health Check | `https://finance-dashboard-backend-production-d325.up.railway.app/health` |
-| **Swagger Docs** | `https://finance-dashboard-backend-production-d325.up.railway.app/docs` |
+| **Swagger Docs** | `https://finance-dashboard-backend-production-d325.up.railway.app/api/docs` |
 
 ### Default Test Credentials
 | Role | Email | Password |

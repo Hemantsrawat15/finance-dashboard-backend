@@ -4,6 +4,9 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+
 
 connectDB();
 
@@ -29,6 +32,40 @@ app.get('/health', (req, res) => {
         { success: true, message: 'Server is running normally' }
     );
 });
+
+const swaggerSpec = swaggerJsdoc({
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Finance Dashboard API',
+            version: '1.0.0',
+            description: 'Backend API for Finance Dashboard with JWT auth and role-based access control',
+        },
+        servers: [
+            {
+                url: 'http://localhost:3000',
+                description: 'Local Development',
+            },
+            {
+                url: 'https://finance-dashboard-backend-production-d325.up.railway.app',
+                description: 'Production (Railway)',
+            },
+        ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                    description: 'Paste your JWT token here. Get it from POST /api/auth/login',
+                },
+            },
+        },
+    },
+    apis: ['./src/routes/*.js'],
+});
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((req, res, next) => {
     res.status(404).json({ success: false, message: 'Route not found' });

@@ -12,9 +12,9 @@ JWT authentication, financial record management, and dashboard analytics.
 
 | Resource | URL |
 |----------|-----|
-| Base URL | `https://your-app.railway.app` |
-| Health Check | `https://your-app.railway.app/health` |
-| **Swagger Docs** | `https://your-app.railway.app/api/docs` |
+| Base URL | `https://finance-dashboard-backend-production-d325.up.railway.app/` |
+| Health Check | `https://finance-dashboard-backend-production-d325.up.railway.app/health` |
+| **Swagger Docs** | `https://finance-dashboard-backend-production-d325.up.railway.app/docs` |
 
 ### Default Test Credentials
 | Role | Email | Password |
@@ -58,7 +58,7 @@ JWT authentication, financial record management, and dashboard analytics.
 ### Steps
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/finance-dashboard-backend.git
+git clone https://github.com/Hemantsrawat15/finance-dashboard-backend.git
 cd finance-dashboard-backend
 
 # 2. Install dependencies

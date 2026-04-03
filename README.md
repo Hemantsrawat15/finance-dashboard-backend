@@ -189,6 +189,16 @@ finance-dashboard-backend/
 
 ---
 
+## ✨ Optional Enhancements Implemented
+
+- **Swagger API Documentation** — Interactive docs at `/api/docs`
+- **Pagination & Filtering** — Built-in pagination on `GET /api/records`
+- **Rate Limiting** — Protects APIs with `express-rate-limit`
+- **Soft Delete** — Records are hidden instead of hard-deleted for audit trailing
+- **Automated Tests** — Key integration tests via Jest + Supertest
+
+---
+
 ## ✅ Submission Checklist
 
 - [x] All 14+ endpoints implemented and tested

@@ -39,6 +39,15 @@ const financialRecordSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
+financialRecordSchema.set('toJSON', {
+    transform: (doc, ret) => {
+        if (ret.amount && ret.amount.toString) {
+            ret.amount = parseFloat(ret.amount.toString());
+        }
+        return ret;
+    }
+});
+
 financialRecordSchema.pre('find', function () {
   if (!this.getOptions().includeSoftDeleted) {
     this.where({ isDeleted: false });
@@ -52,6 +61,12 @@ financialRecordSchema.pre('findOne', function () {
 });
 
 financialRecordSchema.pre('findOneAndUpdate', function () {
+  if (!this.getOptions().includeSoftDeleted) {
+    this.where({ isDeleted: false });
+  }
+});
+
+financialRecordSchema.pre('countDocuments', function () {
   if (!this.getOptions().includeSoftDeleted) {
     this.where({ isDeleted: false });
   }

@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const connectDB = require('./config/db');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
+const rateLimit = require('express-rate-limit');
 
 
 connectDB();
@@ -16,6 +17,13 @@ app.use(helmet());
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: { success: false, message: 'Too many requests, please try again later' }
+});
+app.use('/api/', limiter);
 
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
@@ -72,10 +80,16 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+    if (err.stack) {
+        console.error(err.stack);
+    } else {
+        console.error('Error info:', err);
+    }
+    
     res.status(err.status || 500).json({
         success: false,
         message: err.message || 'Internal Server Error',
+        ...(err.errors && { errors: err.errors })
     });
 });
 

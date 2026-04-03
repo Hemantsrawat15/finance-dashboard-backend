@@ -18,7 +18,7 @@ const getAll = async ({ type, category, from, to, page = 1, limit = 10 }) => {
     .skip(skip)
     .limit(Number(limit));
 
-  const total = await FinancialRecord.countDocuments(filter);
+  const total = await FinancialRecord.countDocuments({ ...filter, isDeleted: false });
 
   return { records, total, page: Number(page), limit: Number(limit) };
 };

@@ -47,8 +47,8 @@ const swaggerSpec = swaggerJsdoc({
                 description: 'Local Development',
             },
             {
-                url: 'https://finance-dashboard-backend-production-d325.up.railway.app',
-                description: 'Production (Railway)',
+                url: 'https://finance-dashboard-backend-wkec.onrender.com',
+                description: 'Production (Render)',
             },
         ],
         components: {

@@ -12,9 +12,9 @@ JWT authentication, financial record management, and dashboard analytics.
 
 | Resource | URL |
 |----------|-----|
-| Base URL | `https://your-app.railway.app` |
-| Health Check | `https://your-app.railway.app/health` |
-| **Swagger Docs** | `https://your-app.railway.app/api/docs` |
+| Base URL | `https://finance-dashboard-backend-wkec.onrender.com` |
+| Health Check | `https://finance-dashboard-backend-wkec.onrender.com/health` |
+| **Swagger Docs** | `https://finance-dashboard-backend-wkec.onrender.com/api/docs` |
 
 ### Default Test Credentials
 | Role | Email | Password |

@@ -11,17 +11,22 @@ router.use(authorize('analyst', 'admin'));
  * @swagger
  * /api/dashboard/summary:
  *   get:
- *     summary: Get total income, expenses and net balance (Analyst/Admin)
+ *     summary: Get overall financial summary
+ *     description: |
+ *       Returns a high-level financial summary of the system, including total income, total expenses, and net balance.
+ *       This endpoint is designed for dashboard KPI cards and top-level summary panels in reporting interfaces.
+ *       It is accessible only to analysts and admins because it exposes aggregated financial intelligence rather than raw transaction browsing alone.
+ *       Soft-deleted records should not contribute to the summary totals.
  *     tags: [Dashboard]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Financial summary
+ *         description: Financial summary generated successfully.
  *       401:
- *         description: Unauthorized
+ *         description: No token provided, invalid token, or expired token.
  *       403:
- *         description: Forbidden
+ *         description: Access denied because only analysts and admins can access dashboard analytics.
  */
 router.get('/summary', ctrl.getSummary);
 
@@ -29,17 +34,22 @@ router.get('/summary', ctrl.getSummary);
  * @swagger
  * /api/dashboard/by-category:
  *   get:
- *     summary: Get spending breakdown by category (Analyst/Admin)
+ *     summary: Get totals grouped by category
+ *     description: |
+ *       Returns aggregated financial totals grouped by category and record type.
+ *       This endpoint is useful for category breakdown charts, expense analysis views, and financial composition widgets in a dashboard.
+ *       It helps consumers understand where money is coming from and where it is being spent.
+ *       Soft-deleted records should be excluded from aggregation results.
  *     tags: [Dashboard]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Category breakdown
+ *         description: Category-wise financial totals returned successfully.
  *       401:
- *         description: Unauthorized
+ *         description: No token provided, invalid token, or expired token.
  *       403:
- *         description: Forbidden
+ *         description: Access denied because only analysts and admins can access dashboard analytics.
  */
 router.get('/by-category', ctrl.getByCategory);
 
@@ -47,17 +57,22 @@ router.get('/by-category', ctrl.getByCategory);
  * @swagger
  * /api/dashboard/trends:
  *   get:
- *     summary: Get last 12 months income vs expense trends (Analyst/Admin)
+ *     summary: Get monthly income and expense trends
+ *     description: |
+ *       Returns trend data for the most recent twelve-month period, grouped by month and transaction type.
+ *       This endpoint is intended for line charts, trend comparison graphs, and time-series reporting in the dashboard.
+ *       It allows analysts and admins to observe patterns in income and expense movement over time.
+ *       Soft-deleted records should be excluded from these calculations.
  *     tags: [Dashboard]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Monthly trend data
+ *         description: Monthly trend analytics returned successfully.
  *       401:
- *         description: Unauthorized
+ *         description: No token provided, invalid token, or expired token.
  *       403:
- *         description: Forbidden
+ *         description: Access denied because only analysts and admins can access dashboard analytics.
  */
 router.get('/trends', ctrl.getMonthlyTrends);
 
@@ -65,17 +80,22 @@ router.get('/trends', ctrl.getMonthlyTrends);
  * @swagger
  * /api/dashboard/recent:
  *   get:
- *     summary: Get last 10 transactions (Analyst/Admin)
+ *     summary: Get latest recent transactions
+ *     description: |
+ *       Returns the most recent financial records, usually limited to the latest ten transactions.
+ *       This endpoint is designed for recent activity widgets, dashboard feeds, and quick operational review panels.
+ *       It helps analysts and administrators quickly inspect the latest changes entering the system without applying filters manually.
+ *       Soft-deleted records should not appear in this result set.
  *     tags: [Dashboard]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Recent transactions
+ *         description: Recent transactions returned successfully.
  *       401:
- *         description: Unauthorized
+ *         description: No token provided, invalid token, or expired token.
  *       403:
- *         description: Forbidden
+ *         description: Access denied because only analysts and admins can access dashboard analytics.
  */
 router.get('/recent', ctrl.getRecent);
 
